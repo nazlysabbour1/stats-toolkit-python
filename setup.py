@@ -8,13 +8,10 @@ setuptools.setup(
     version="0.0.1",
     author="Nazly Sabbour",
     author_email="nazly.sabbour@gmail.com",
-    description="A small example package",
+    description="code snippets for statistical tests in python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
-    project_urls={
-        "Bug Tracker": "https://github.com/pypa/sampleproject/issues",
-    },
+    url="https://github.com/nazlysabbour1/stats-toolkit-python",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
