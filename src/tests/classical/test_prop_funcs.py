@@ -25,7 +25,6 @@ def test_prop_hypothesis():
     assert workout_ci == actual_ci
 
 
-
 def test_props_hypothesis():
     sample1 = np.random.choice(2, 10, p=[0.5, 0.5])
     sample2 = np.random.choice(2, 10, p=[0.55, 0.45])
