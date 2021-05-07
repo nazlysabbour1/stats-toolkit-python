@@ -12,6 +12,7 @@ The module contains useful functions for evaluating AB tests
 import numpy as np
 import statsmodels.stats.api as sms
 from statsmodels.stats.weightstats import ttest_ind
+import scipy.stats
 
 
 def one_mean_conf_interval(values: np.ndarray,
@@ -87,3 +88,16 @@ def two_means_hypothesis(values1: np.ndarray, values2: np.ndarray,
     (tstat, pval, df) = ttest_ind(values1, values2, usevar=usevar,
                                   alternative=alternative)
     return (tstat, pval)
+
+
+def multiple_mean_hypothesis(*args) -> tuple:
+    """Computes Anova test to get whether the mean of at least one group is
+    different
+    Args:
+        *args consecutive sample group values each group sample
+              is represented by a list
+    Returns:
+        tuple: f statistic, p value
+    """
+    result = scipy.stats.f_oneway(*args)
+    return (result.statistic, result.pvalue)

@@ -1,4 +1,4 @@
-import scipy
+import scipy.stats
 
 
 def get_z_critical(conf_level: float) -> float:
@@ -82,3 +82,7 @@ def get_norm_pvalue(z_value: float,
     else:
         raise ValueError("invalid alternative")
     return p_value
+
+
+def get_f_pvalue(f_value: float, dfg: int, dfe: int):
+    return scipy.stats.f.sf(f_value, dfg, dfe)

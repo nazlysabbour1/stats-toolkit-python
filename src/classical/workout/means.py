@@ -107,6 +107,36 @@ def two_means_hypothesis(values1: np.ndarray, values2: np.ndarray,
     return (t_statistic, p_value)
 
 
+def multiple_mean_hypothesis(*args) -> tuple:
+    """Computes Anova test to get whether the mean of at least one group is 
+    different
+    Args:
+        *args consecutive sample group values each group sample
+              is represented by a list
+    Returns:
+        tuple: f statistic, p value
+    """
+    groups = [np.asarray(arg, dtype=float) for arg in args]
+    all = np.concatenate(groups)
+    n_g = len(groups)
+    n_t = len(all)
+    y_bar = np.mean(all)
+    sst = np.sum((all-y_bar)**2)
+    y_barg = list(map(np.mean, groups))
+    n_per_g = list(map(len, groups))
+    ssg = sum([n_per_g[i] * (y_g-y_bar)**2 for i, y_g in enumerate(y_barg)])
+
+    sse = sst - ssg
+    df_t = n_t - 1
+    df_g = n_g - 1
+    df_e = df_t - df_g
+    mse = sse / df_e
+    msg = ssg / df_g
+    f_statistic = msg/mse
+    p_value = utils.get_f_pvalue(f_statistic, df_g, df_e)
+    return (f_statistic, p_value)
+
+
 def __get_two_sample_standard_error(values1: np.ndarray, values2: np.ndarray,
                                     pooled: bool = False) -> float:
     """Calculates standard error for the mean of two samples

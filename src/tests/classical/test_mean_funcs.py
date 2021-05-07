@@ -26,7 +26,7 @@ def test_mean_hypothesis():
     assert workout_result == pytest.approx(actual_result)
 
 
-def test_means_hypothesis():
+def test_two_means_hypothesis():
     sample1 = np.random.normal(50, 1, 10)
     sample2 = np.random.normal(51, 1, 10)
     workout_result = workout.two_means_hypothesis(sample1, sample2,
@@ -37,7 +37,7 @@ def test_means_hypothesis():
     assert workout_result == pytest.approx(actual_result)
 
 
-def test_means_conf_interval():
+def test_means_diff_conf_interval():
     sample1 = np.random.normal(50, 1, 10)
     sample2 = np.random.normal(51, 1, 10)
     conf = 0.95
@@ -49,3 +49,14 @@ def test_means_conf_interval():
 
     assert base_ci == pytest.approx(stats_ci)
 
+
+def test_multiple_means_hypothesis():
+    sample1 = np.random.normal(50, 1, 10)
+    sample2 = np.random.normal(51, 1, 10)
+    sample3 = np.random.normal(52, 1, 10)
+
+    workout_result = workout.multiple_mean_hypothesis(sample1, sample2,
+                                                      sample3)
+    actual_result = means.multiple_mean_hypothesis(sample1, sample2, sample3)
+
+    assert workout_result == pytest.approx(actual_result)
