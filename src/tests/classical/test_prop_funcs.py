@@ -11,10 +11,19 @@ np.random.seed(0)
 
 
 def test_prop_conf_interval():
-    sample1 = np.random.choice(2, 10, p=[0.5, 0.5])
+    sample1 = np.random.choice(2, 100, p=[0.5, 0.5])
     workout_ci = workout.one_prop_conf_interval(sample1)
     actual_ci = proportions.one_prop_conf_interval(sample1)
     assert workout_ci == actual_ci
+
+
+def test_prop_hypothesis():
+    sample1 = np.random.choice(2, 10, p=[0.55, 0.45])
+    null_value = 0.40
+    workout_ci = workout.one_prop_hypothesis(sample1, null_value)
+    actual_ci = workout.one_prop_hypothesis(sample1, null_value)
+    assert workout_ci == actual_ci
+
 
 
 def test_props_hypothesis():
