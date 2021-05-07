@@ -61,7 +61,6 @@ def one_mean_conf_interval(values: np.ndarray,
     n = len(values)
     se = sd/math.sqrt(n)
     t_critical = get_t_critical(conf_level, n-1)
-    print(t_critical, x_bar, se, sd)
     lower_ci = x_bar - t_critical * se
     upper_ci = x_bar + t_critical * se
     return (lower_ci, upper_ci)
